@@ -1,13 +1,20 @@
-const Tag = ({name, onClick, onClickX}) => {
+import TagDeleteButton from './TagDeleteButton'
+
+const Tag = ({
+    name,
+    isSelected,
+    onClick,
+    onClickDelete
+}) => {
+    let className = 'inline-block px-2 py-1 rounded-full'
+    className += isSelected ? ' bg-gray-500' : ' bg-gray-300'
+    className += onClickDelete ? ' rounded-tr-none rounded-br-none' : ''
+
     return (
-        <div className="inline-block bg-gray-300 px-2 py-1 rounded-full border border-black">
-            <button onClick={onClick}>
-                {name}
-            </button>
-            {onClickX && 
-                <button className="pl-3" onClick={onClickX}>X</button>
-            }
-        </div>
+        <>
+        <button className={className} onClick={onClick}>{name}</button>
+        {onClickDelete && <TagDeleteButton isSelected={isSelected} onClick={onClickDelete} />}
+        </>
     )
 }
 
